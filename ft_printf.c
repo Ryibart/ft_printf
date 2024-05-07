@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 21:09:40 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:04:24 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,37 @@ static	int	formats(va_list args, const char format)
 	return (print_count);
 }
 
+static int	error_return(va_list args)
+{
+	va_end(args);
+	return (-1);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		i;
+	int		temp;
 	int		print_count;
 
-	i = 0;
 	print_count = 0;
 	va_start(args, str);
-	while (str[i])
+	while (*str != '\0')
 	{
-		if (str[i] == '%')
+		if (*str == '%')
 		{
-			print_count += formats(args, str[i + 1]);
-			i += 2;
+			str++;
+			if (ft_strchr("cspdiuxX%", *str))
+				temp = formats(args, *str);
 		}
 		else
 		{
-			ft_putchar_fd(str[i], 1);
-			i++;
+			ft_putchar_fd(*str, 1);
 			print_count++;
 		}
+		if (temp == -1)
+			return (error_return(args));
+		temp += print_count;
+		str++;
 	}
 	va_end(args);
 	return (print_count);

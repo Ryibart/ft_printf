@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:49:09 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 21:12:38 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:41:39 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	print_nbr(int nbr)
 	if (!str)
 		return (0);
 	len = ft_strlen(str);
-	print_str(str);
+	if (print_str(str) == -1)
+		return(-1);
 	free(str);
 	if (nbr == 0)
 		return (1);

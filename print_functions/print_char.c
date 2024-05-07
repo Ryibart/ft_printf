@@ -6,14 +6,15 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:21:06 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 19:20:39 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:07:59 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	print_char(char c)
+int print_char(char c)
 {
-	ft_putchar_fd(c, 1);
+	if (write(1, &c, 1) == -1)
+		return (-1);
 	return (1);
 }

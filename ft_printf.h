@@ -18,9 +18,7 @@
 
 int		ft_printf(const char *str, ...);
 
-int		digit_count(int long long n);
 char	*util_uitoa(unsigned int n);
-void	puthex(unsigned long nbr, const char format);
 int		hexlen(unsigned long n);
 
 int		print_char(char c);

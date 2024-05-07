@@ -6,16 +6,19 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:05:55 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 20:53:07 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:40:31 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	digit_count(int long long n)
+
+char	*util_uitoa(unsigned int n)
 {
-	int	count;
+	int		len;
+	char	*str;
+	int		count;
 
 	count = 1;
 	while (n / 10 != 0)
@@ -23,15 +26,7 @@ int	digit_count(int long long n)
 		n /= 10;
 		count++;
 	}
-	return (count);
-}
-
-char	*util_uitoa(unsigned int n)
-{
-	int		len;
-	char	*str;
-
-	len = digit_count(n);
+	len = count;
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
@@ -44,33 +39,6 @@ char	*util_uitoa(unsigned int n)
 		len--;
 	}
 	return (str);
-}
-
-void	puthex(unsigned long nbr, const char format)
-{
-	char			*hex;
-	int long long	digit;
-	int				shift;
-	int				zero_check;
-
-	if (format == 'X')
-		hex = "0123456789ABCDEF";
-	else
-		hex = "0123456789abcdef";
-	shift = (sizeof(nbr) * 8) - 4;
-	zero_check = 1;
-	while (shift >= 0)
-	{
-		digit = (nbr >> shift) & 0xf;
-		if (digit != 0 || !zero_check)
-		{
-			ft_putchar_fd(hex[digit], 1);
-			zero_check = 0;
-		}
-		shift -= 4;
-	}
-	if (zero_check)
-		ft_putchar_fd('0', 1);
 }
 
 int	hexlen(unsigned long n)

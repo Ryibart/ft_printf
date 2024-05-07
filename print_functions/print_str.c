@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:21:02 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 20:31:28 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 14:42:37 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 int	print_str(char *str)
 {
+	int len;
+	int temp;
+
+	len = 0;
 	if (!str)
 	{
-		ft_putstr_fd("(null)", 1);
-		return (6);
+		temp = write(1, "(null)", 6);
+		return (temp);
 	}
-	ft_putstr_fd(str, 1);
-	return (ft_strlen((const char *)str));
+	while (str[len])
+	{
+		if (write(1, &str[len], 1) == -1)
+			return (-1);
+		len++;
+	}
+	return (len);
 }
