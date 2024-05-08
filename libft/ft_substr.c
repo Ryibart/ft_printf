@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 20:43:43 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/06 11:50:33 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 20:03:00 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	size_t	actual_len;
 
-	i = 1;
+	i = 0;
 	actual_len = len;
 	if (!s)
 		return (0);

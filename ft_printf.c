@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:04:24 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/08 18:15:06 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static	int	formats(va_list args, const char format)
 	else if (format == '%')
 	{
 		print_count += 1;
-		ft_putchar_fd('%', 1);
+		if (print_char('%') == -1)
+			return (-1);
 	}
 	return (print_count);
 }
@@ -43,32 +44,41 @@ static int	error_return(va_list args)
 	return (-1);
 }
 
-int	ft_printf(const char *str, ...)
+int	parse(const char *str, va_list args, unsigned int print_count)
 {
-	va_list	args;
-	int		temp;
-	int		print_count;
+	int				temp;
 
 	print_count = 0;
-	va_start(args, str);
 	while (*str != '\0')
 	{
 		if (*str == '%')
 		{
 			str++;
+			if (*str == '\0')
+				break ;
 			if (ft_strchr("cspdiuxX%", *str))
 				temp = formats(args, *str);
+			else
+				return (error_return(args));
 		}
 		else
-		{
-			ft_putchar_fd(*str, 1);
-			print_count++;
-		}
+			temp = print_char(*str);
 		if (temp == -1)
 			return (error_return(args));
-		temp += print_count;
+		print_count += temp;
 		str++;
 	}
+	return (print_count);
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list			args;
+	unsigned int	print_count;
+
+	print_count = 0;
+	va_start(args, str);
+	print_count = parse(str, args, print_count);
 	va_end(args);
 	return (print_count);
 }

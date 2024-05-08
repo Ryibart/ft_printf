@@ -17,13 +17,12 @@
 # include "libft.h"
 
 int		ft_printf(const char *str, ...);
-
 char	*util_uitoa(unsigned int n);
 int		hexlen(unsigned long n);
 
 int		print_char(char c);
-int		print_hex(unsigned int nbr, const char format);
-int		print_nbr(int nbr);
+int		print_hex(unsigned long nbr, const char format);
+int		print_nbr(int long nbr);
 int		print_ptr(void *pointer, const char format);
 int		print_str(char *str);
 int		print_uint(unsigned int nbr);

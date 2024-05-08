@@ -6,23 +6,32 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:49:09 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:41:39 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:40:20 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+#include <limits.h>
 
-int	print_nbr(int nbr)
+int	print_nbr(int long nbr)
 {
 	char	*str;
 	int		len;
 
+	if (nbr > INT_MAX || nbr < INT_MIN)
+		return (-1);
 	str = ft_itoa(nbr);
 	if (!str)
-		return (0);
+	{
+		free(str);
+		return (-1);
+	}
 	len = ft_strlen(str);
 	if (print_str(str) == -1)
-		return(-1);
+	{
+		free(str);
+		return (-1);
+	}
 	free(str);
 	if (nbr == 0)
 		return (1);

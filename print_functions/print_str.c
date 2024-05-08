@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:21:02 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/07 14:42:37 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:02:43 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 int	print_str(char *str)
 {
-	int len;
-	int temp;
+	int	len;
 
 	len = 0;
 	if (!str)
-	{
-		temp = write(1, "(null)", 6);
-		return (temp);
-	}
+		return (write(1, "(null)", 6));
 	while (str[len])
 	{
 		if (write(1, &str[len], 1) == -1)
