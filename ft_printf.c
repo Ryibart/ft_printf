@@ -6,13 +6,13 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/08 18:15:06 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/10 15:56:50 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int	formats(va_list args, const char format)
+static	int	format_flags(va_list args, const char format)
 {
 	int	print_count;
 
@@ -44,7 +44,7 @@ static int	error_return(va_list args)
 	return (-1);
 }
 
-int	parse(const char *str, va_list args, unsigned int print_count)
+int	print_and_parse(const char *str, va_list args, unsigned int print_count)
 {
 	int				temp;
 
@@ -57,7 +57,7 @@ int	parse(const char *str, va_list args, unsigned int print_count)
 			if (*str == '\0')
 				break ;
 			if (ft_strchr("cspdiuxX%", *str))
-				temp = formats(args, *str);
+				temp = format_flags(args, *str);
 			else
 				return (error_return(args));
 		}
@@ -78,7 +78,7 @@ int	ft_printf(const char *str, ...)
 
 	print_count = 0;
 	va_start(args, str);
-	print_count = parse(str, args, print_count);
+	print_count = print_and_parse(str, args, print_count);
 	va_end(args);
 	return (print_count);
 }
