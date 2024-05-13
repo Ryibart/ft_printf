@@ -6,13 +6,38 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/10 15:56:50 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/13 17:37:17 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*══| ft_printf |══════════════════════════════════════════════════════════════*
+	
+	Purpose:	Prints data to the standard output according to the given
+				format string and/or arguments according to the format specifiers.
+				
+	Parameters:
+				str (IN) -- A string containing the format string and optional
+							arguments.
+				... (IN) -- A variable number of arguments to be formatted
+							and printed according to the format string.
+
+	Returns:	
+				The number of characters printed, or `-1` if an error occurs.
+
+	Helpers:	
+				`format_flags` -- Formats and prints the argument according to
+								  the format specifier by calling the appropriate
+								  function.
+				`error_return` -- Closes the variable argument list and returns
+									`-1`.
+				`print_and_parse` -- Iterates through the format string and
+									prints the characters and arguments.
+
+*═════════════════════════════════════════════════════════════════════════════*/
+
 #include "ft_printf.h"
 
-static	int	format_flags(va_list args, const char format)
+static int	format_flags(va_list args, const char format)
 {
 	int	print_count;
 
@@ -44,7 +69,8 @@ static int	error_return(va_list args)
 	return (-1);
 }
 
-int	print_and_parse(const char *str, va_list args, unsigned int print_count)
+static int	print_and_parse(const char *str, va_list args,
+							unsigned int print_count)
 {
 	int				temp;
 
