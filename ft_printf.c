@@ -6,14 +6,15 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/13 17:37:17 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/20 13:13:22 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*══| ft_printf |══════════════════════════════════════════════════════════════*
 	
-	Purpose:	Prints data to the standard output according to the given
-				format string and/or arguments according to the format specifiers.
+	Purpose:	Prints data to the standard output according
+				to the given format string and/or arguments
+				according to the format specifiers.
 				
 	Parameters:
 				str (IN) -- A string containing the format string and optional

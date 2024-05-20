@@ -6,7 +6,7 @@
 #    By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:52:06 by rtammi            #+#    #+#              #
-#    Updated: 2024/05/08 16:22:14 by rtammi           ###   ########.fr        #
+#    Updated: 2024/05/20 13:08:22 by rtammi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ all:		$(NAME)
 libft	:
 			$(MAKE) -C $(LIBFT)
 
-$(NAME): $(OBJS) libft
+$(LIBFT)/libft.a : libft
+
+$(NAME): $(OBJS) $(LIBFT)/libft.a
 	cp $(LIBFT)/libft.a $(NAME)
 	$(AR) $(NAME) $(OBJS)
 
