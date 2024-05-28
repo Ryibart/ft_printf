@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:13:56 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/20 13:13:22 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:47:50 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 				`format_flags` -- Formats and prints the argument according to
 								  the format specifier by calling the appropriate
 								  function.
-				`error_return` -- Closes the variable argument list and returns
-									`-1`.
 				`print_and_parse` -- Iterates through the format string and
 									prints the characters and arguments.
 
@@ -38,23 +36,23 @@
 
 #include "ft_printf.h"
 
-static int	format_flags(va_list args, const char format)
+static int	format_flags(va_list *args, const char format)
 {
 	int	print_count;
 
 	print_count = 0;
 	if (format == 'c')
-		print_count += print_char(va_arg(args, int));
+		print_count += print_char(va_arg(*args, int));
 	else if (format == 's')
-		print_count += print_str(va_arg(args, char *));
+		print_count += print_str(va_arg(*args, char *));
 	else if (format == 'p')
-		print_count += print_ptr(va_arg(args, void *), format);
+		print_count += print_ptr(va_arg(*args, void *), format);
 	else if (format == 'd' || format == 'i')
-		print_count += print_nbr(va_arg(args, int));
+		print_count += print_nbr(va_arg(*args, int));
 	else if (format == 'u')
-		print_count += print_uint(va_arg(args, unsigned int));
+		print_count += print_uint(va_arg(*args, unsigned int));
 	else if (format == 'x' || format == 'X')
-		print_count += print_hex(va_arg(args, unsigned int), format);
+		print_count += print_hex(va_arg(*args, unsigned int), format);
 	else if (format == '%')
 	{
 		print_count += 1;
@@ -64,13 +62,7 @@ static int	format_flags(va_list args, const char format)
 	return (print_count);
 }
 
-static int	error_return(va_list args)
-{
-	va_end(args);
-	return (-1);
-}
-
-static int	print_and_parse(const char *str, va_list args,
+static int	print_and_parse(const char *str, va_list *args,
 							unsigned int print_count)
 {
 	int				temp;
@@ -86,12 +78,12 @@ static int	print_and_parse(const char *str, va_list args,
 			if (ft_strchr("cspdiuxX%", *str))
 				temp = format_flags(args, *str);
 			else
-				return (error_return(args));
+				return (-1);
 		}
 		else
 			temp = print_char(*str);
 		if (temp == -1)
-			return (error_return(args));
+			return (-1);
 		print_count += temp;
 		str++;
 	}
@@ -105,7 +97,7 @@ int	ft_printf(const char *str, ...)
 
 	print_count = 0;
 	va_start(args, str);
-	print_count = print_and_parse(str, args, print_count);
+	print_count = print_and_parse(str, &args, print_count);
 	va_end(args);
 	return (print_count);
 }

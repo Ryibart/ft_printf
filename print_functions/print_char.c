@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:21:06 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/08 16:52:24 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/23 13:53:51 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 int	print_char(char c)
 {
-	if (write(1, &c, 1) == -1)
-		return (-1);
-	return (1);
+	return (write(1, &c, 1));
 }

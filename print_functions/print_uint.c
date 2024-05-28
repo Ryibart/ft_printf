@@ -6,7 +6,7 @@
 /*   By: rtammi <rtammi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:16 by rtammi            #+#    #+#             */
-/*   Updated: 2024/05/07 16:32:36 by rtammi           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:49:15 by rtammi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,15 @@ int	print_uint(unsigned int nbr)
 	int		len;
 
 	if (nbr == 0)
-	{
-		if (print_str("0") == -1)
-			return (-1);
-		return (1);
-	}
+		return (write(1, "0", 1));
 	str = util_uitoa(nbr);
 	if (!str)
 	{
 		free(str);
 		return (-1);
 	}
-	len = ft_strlen(str);
-	if (print_str(str) == -1)
+	len = print_str(str);
+	if (len == -1)
 	{
 		free(str);
 		return (-1);
